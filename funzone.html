@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>COMING SOON (do not stare for more than 3 seconds)</title>
+<style>
+  :root {
+    --glitch-color-1: #ff0044;
+    --glitch-color-2: #00ffea;
+    --glitch-color-3: #ffea00;
+    --glitch-color-4: #ff00ff;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: none;
+  }
+
+  body::before, body::after {
+    content:"";
+    position:fixed;
+    inset:0;
+    background: repeating-linear-gradient(
+      45deg,
+      #000 0px, #000 2px,
+      #111 2px, #111 4px
+    );
+    opacity:0.7;
+    pointer-events:none;
+    animation: scanlines 8s linear infinite;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-4px); }
+  }
+
+  .glitch-wrapper {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+
+  .glitch-text {
+    position: relative;
+    font-size: clamp(4rem, 18vw, 22rem);
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    text-shadow: 
+      0.05em 0 0 var(--glitch-color-1),
+      -0.05em 0 0 var(--glitch-color-2),
+      0 0.05em 0 var(--glitch-color-3),
+      0 -0.05em 0 var(--glitch-color-4);
+    animation: glitch-1 4s infinite linear alternate-reverse,
+               glitch-2 5s infinite steps(5),
+               glitch-3 7s infinite linear;
+    user-select: none;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00aa;
+    clip: rect(44px, 9999px, 88px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: 2px 0 #00ffff;
+    clip: rect(0, 9999px, 44px, 0);
+    animation: glitch-anim2 2.4s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-1 {
+    0%,100%   { transform: translate(0); }
+    20%       { transform: translate(-8px, 5px); }
+    40%       { transform: translate(6px, -4px); }
+    60%       { transform: translate(-4px, 6px); }
+    80%       { transform: translate(5px, -3px); }
+  }
+
+  @keyframes glitch-2 {
+    0%    { transform: translate(0); }
+    20%   { transform: translate(0, -10px) skew(10deg); }
+    40%   { transform: translate(0, 8px) skew(-8deg); }
+    60%   { transform: translate(0, -6px) skew(12deg); }
+    80%   { transform: translate(0, 7px) skew(-9deg); }
+    100%  { transform: translate(0); }
+  }
+
+  @keyframes glitch-3 {
+    0%    { clip: rect(42px, 9999px, 84px, 0); }
+    5%    { clip: rect(17px, 9999px, 94px, 0); }
+    10%   { clip: rect(63px, 9999px, 102px, 0); }
+    15%   { clip: rect(30px, 9999px, 87px, 0); }
+    20%   { clip: rect(85px, 9999px, 136px, 0); }
+    25%   { clip: rect(5px, 9999px, 53px, 0); }
+    30%   { clip: rect(71px, 9999px, 119px, 0); }
+    100%  { clip: rect(42px, 9999px, 84px, 0); }
+  }
+
+  @keyframes glitch-anim {
+    0%    { clip: rect(65px, 9999px, 119px, 0); transform: skew(0.4deg); }
+    5%    { clip: rect(76px, 9999px, 146px, 0); transform: skew(1.2deg); }
+    10%   { clip: rect(85px, 9999px, 99px, 0); transform: skew(0.8deg); }
+    15%   { clip: rect(5px, 9999px, 102px, 0); transform: skew(0.3deg); }
+    20%   { clip: rect(71px, 9999px, 149px, 0); transform: skew(-0.7deg); }
+    25%   { clip: rect(95px, 9999px, 172px, 0); transform: skew(1.1deg); }
+    30%   { clip: rect(31px, 9999px, 149px, 0); transform: skew(-0.4deg); }
+    35%   { clip: rect(79px, 9999px, 102px, 0); transform: skew(0.9deg); }
+    40%   { clip: rect(6px, 9999px, 87px, 0); transform: skew(-1deg); }
+    45%   { clip: rect(57px, 9999px, 98px, 0); transform: skew(0.6deg); }
+    50%   { clip: rect(12px, 9999px, 134px, 0); transform: skew(-0.2deg); }
+    55%   { clip: rect(85px, 9999px, 176px, 0); transform: skew(0.7deg); }
+    60%   { clip: rect(46px, 9999px, 108px, 0); transform: skew(-1.3deg); }
+    100%  { clip: rect(65px, 9999px, 119px, 0); transform: skew(0.4deg); }
+  }
+
+  @keyframes glitch-anim2 {
+    0%    { clip: rect(38px, 9999px, 94px, 0); transform: skew(-0.6deg); }
+    5%    { clip: rect(65px, 9999px, 112px, 0); transform: skew(0.9deg); }
+    10%   { clip: rect(8px, 9999px, 86px, 0); transform: skew(-1.1deg); }
+    15%   { clip: rect(51px, 9999px, 134px, 0); transform: skew(0.5deg); }
+    20%   { clip: rect(92px, 9999px, 167px, 0); transform: skew(-0.8deg); }
+    25%   { clip: rect(27px, 9999px, 89px, 0); transform: skew(1deg); }
+    30%   { clip: rect(74px, 9999px, 156px, 0); transform: skew(-0.3deg); }
+    35%   { clip: rect(19px, 9999px, 93px, 0); transform: skew(0.7deg); }
+    40%   { clip: rect(88px, 9999px, 144px, 0); transform: skew(-1.2deg); }
+    45%   { clip: rect(43px, 9999px, 101px, 0); transform: skew(0.4deg); }
+    50%   { clip: rect(67px, 9999px, 128px, 0); transform: skew(-0.9deg); }
+    100%  { clip: rect(38px, 9999px, 94px, 0); transform: skew(-0.6deg); }
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0; right: 0; height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      rgba(255,0,255,0.08) 50%,
+      rgba(0,255,255,0.06) 51%,
+      transparent 51%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scan 10s linear infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" /><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.07"/></svg>');
+    pointer-events: none;
+    animation: noise-anim 0.15s steps(1) infinite;
+    mix-blend-mode: overlay;
+  }
+
+  @keyframes noise-anim {
+    0%,100% { background-position: 0 0; }
+    10% { background-position: -100px 100px; }
+    20% { background-position: 100px -50px; }
+    30% { background-position: -50px 75px; }
+    40% { background-position: 75px -25px; }
+    50% { background-position: -25px 50px; }
+    60% { background-position: 50px -75px; }
+    70% { background-position: -75px 25px; }
+    80% { background-position: 25px -100px; }
+    90% { background-position: -100px 0; }
+  }
+
+  .tiny-chaos {
+    position: absolute;
+    color: #0f0;
+    font-size: 1.1rem;
+    opacity: 0.4;
+    pointer-events: none;
+    white-space: nowrap;
+    animation: fly-chaos linear forwards;
+    text-shadow: 0 0 6px #0f0;
+  }
+
+  @keyframes fly-chaos {
+    0%   { transform: translate(0,0) rotate(0deg); opacity:0.6; }
+    100% { transform: translate(var(--dx),var(--dy)) rotate(1080deg); opacity:0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glitch-wrapper">
+  <div class="glitch-text" data-text="COMING SOON">COMING SOON</div>
+</div>
+
+<div class="scanline"></div>
+<div class="noise"></div>
+
+<script>
+const phrases = [
+  "ERROR 404: PATIENCE NOT FOUND",
+  "BUFFERING TRAUMA",
+  "SEGMENTATION FAULT (core dumped)",
+  "SOON™ (patent pending)",
+  "loading existential crisis...",
+  " skill issue ",
+  "the website is gaslighting you",
+  "404 vibes only",
+  "please stand by (aggressively)",
+  "rendering your disappointment",
+  "this is not a website. this is a cry for help",
+  "undefined is typing...",
+  "ratio + L + you fell off",
+  "blinking is pay-to-win now",
+  "i'm inside your monitor",
+  "never gonna give you up (psych)",
+];
+
+function spawnGlitchText() {
+  const el = document.createElement('div');
+  el.className = 'tiny-chaos';
+  el.textContent = phrases[Math.floor(Math.random()*phrases.length)];
+  
+  const x = Math.random() * innerWidth;
+  const y = Math.random() * innerHeight;
+  const dx = (Math.random()-0.5)*3000;
+  const dy = (Math.random()-0.5)*2000;
+  
+  el.style.left = x+'px';
+  el.style.top  = y+'px';
+  el.style.setProperty('--dx', dx+'px');
+  el.style.setProperty('--dy', dy+'px');
+  el.style.animationDuration = (3+Math.random()*6)+'s';
+  
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 12000);
+}
+
+setInterval(spawnGlitchText, 180);
+
+// ultra rare mode switch (every ~12–25 seconds 4% chance)
+setInterval(() => {
+  if (Math.random() < 0.04) {
+    document.querySelector('.glitch-text').textContent = "IT'S NOT COMING";
+    document.querySelector('.glitch-text').dataset.text = "IT'S NOT COMING";
+    document.body.style.background = '#f00';
+    
+    setTimeout(() => {
+      document.querySelector('.glitch-text').textContent = "COMING SOON";
+      document.querySelector('.glitch-text').dataset.text = "COMING SOON";
+      document.body.style.background = '#000';
+    }, 1800 + Math.random()*2200);
+  }
+}, 12000);
+</script>
+
+</body>
+</html>

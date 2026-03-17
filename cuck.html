@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>coming soon (send help)</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(45deg, #0f001a, #1a0033, #330066, #6600cc);
+      background-size: 400% 400%;
+      animation: bgchaos 13s ease infinite;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      overflow: hidden;
+      color: #ff00ff;
+    }
+
+    @keyframes bgchaos {
+      0% {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100% {background-position:0% 50%}
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    h1 {
+      font-size: 9vw;
+      margin: 0;
+      text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 30px #00ffff,
+        0 0 60px #ff00ff,
+        0 0 100px #00ffff;
+      animation: wobble 0.7s infinite alternate, hue-rotate 6s infinite linear;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      font-size: 4.5vw;
+      margin-top: 20px;
+      color: #00ff9d;
+      text-shadow: 3px 3px 0 #ff00aa, -3px -3px 0 #00aaff;
+      animation: glitch 2.3s infinite;
+    }
+
+    .tiny-chaos {
+      position: absolute;
+      font-size: 1.1rem;
+      color: #ffff00;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: flyaway linear infinite;
+    }
+
+    @keyframes wobble {
+      0%   { transform: rotate(-6deg) scale(1.05); }
+      100% { transform: rotate(6deg) scale(0.97); }
+    }
+
+    @keyframes hue-rotate {
+      0%   { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes glitch {
+      0%   { text-shadow: 2px 0 #ff00aa, -2px 0 #00ffff; }
+      10%  { text-shadow: -2px 0 #ff00aa, 2px 0 #00ffff; }
+      20%  { text-shadow: 0 0 #ff00aa; }
+      30%  { text-shadow: 5px 0 #00ffff, -5px 0 #ff00aa; }
+      100% { text-shadow: 2px 0 #ff00aa, -2px 0 #00ffff; }
+    }
+
+    @keyframes flyaway {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translate(var(--tx), var(--ty)) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>COMING<br>SOON™</h1>
+  <div class="subtitle">(probably not actually soon)</div>
+</div>
+
+<script>
+  // spawn tiny chaotic messages that fly away
+  const messages = [
+    "help", "why", "send tacos", "404 patience not found",
+    "loading suffering...", "bro wtf", "i'm in your walls",
+    "blinking is free", "error 69: too horny", "brb crying",
+    "the void is calling", "this is fine.jpg", "gaslight gatekeep girlboss",
+    "undefined is not a function", "meow", "never gonna give you up",
+    "buffering existential dread", "skill issue", "ratio"
+  ];
+
+  function spawnWeirdText() {
+    const txt = document.createElement("div");
+    txt.className = "tiny-chaos";
+    txt.textContent = messages[Math.floor(Math.random() * messages.length)];
+    
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    const tx = (Math.random() - 0.5) * 1800;
+    const ty = (Math.random() - 0.5) * 1200;
+    
+    txt.style.left = x + "px";
+    txt.style.top  = y + "px";
+    txt.style.setProperty("--tx", tx + "px");
+    txt.style.setProperty("--ty", ty + "px");
+    txt.style.animationDuration = (4 + Math.random() * 7) + "s";
+    txt.style.animationDelay = Math.random() * 2 + "s";
+    
+    document.body.appendChild(txt);
+    
+    setTimeout(() => txt.remove(), 14000);
+  }
+
+  setInterval(spawnWeirdText, 400);
+
+  // secret ultra rare event (1% chance every 8 seconds)
+  setInterval(() => {
+    if (Math.random() < 0.01) {
+      document.querySelector('h1').innerHTML = "COMING<br>NEVER ❤️";
+      setTimeout(() => {
+        document.querySelector('h1').innerHTML = "COMING<br>SOON™";
+      }, 2200);
+    }
+  }, 8000);
+</script>
+
+</body>
+</html>
